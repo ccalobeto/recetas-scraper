@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 import scrapy
 import time
-
+from fake_useragent import UserAgent
 
 class RecetaspiderSpider(scrapy.Spider):
     name = 'recetaspider'
     #allowed_domains = ['https://www.recetasgratis.net/']
     start_urls = ['https://www.recetasgratis.net/recetas-peruanas']
     # TIME_SLEEP = 2
+    
+    agent = UserAgent()
+    custom_settings = {
+        'USER_AGENT': agent.random
+    }
 
     def start_requests(self):
         # generates multiple requests from text file
@@ -16,6 +21,7 @@ class RecetaspiderSpider(scrapy.Spider):
             yield scrapy.Request(url)
 
     def parse(self, response):
+        # print(response.request.headers)
         # set the category
         categoria = response.url.split('-')[1]
 
