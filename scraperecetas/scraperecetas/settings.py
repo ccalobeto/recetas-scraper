@@ -91,5 +91,9 @@ HTTPCACHE_EXPIRATION_SECS = 0
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-FEED_FORMAT = 'json'
-FEED_URI = '../data/raw/recetas.json'
+# override deprecating status
+REQUEST_FINGERPRINTER_IMPLEMENTATION = '2.7'
+
+FEEDS = {
+  '../data/raw/recetas.json': {'format': 'json', 'overwrite': True}
+}
